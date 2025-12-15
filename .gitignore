@@ -20,10 +20,10 @@ reports/*.json
 # Postman Environment Files
 # ===============================
 # Ignore real environment files
-environments/*.postman_environment.json
+# environments/*.postman_environment.json
 
 # Allow sample/template environments
-!environments/*.sample.postman_environment.json
+# !environments/*.sample.postman_environment.json
 
 # ===============================
 # OS / IDE
