@@ -15,4 +15,4 @@
 ## How to Run Locally
 ```bash
 newman run collections/ReqRes_API_Testing.postman_collection.json \
-  -e environments/QA.sample.postman_environment.json
+  -e environments/QA.postman_environment.json
