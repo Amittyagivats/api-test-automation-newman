@@ -39,7 +39,7 @@ jobs:
           API_KEY: ${{ secrets.API_KEY }}
         run: |
           newman run collections/ReqRes_API_Testing.postman_collection.json \
-            -e environments/QA.sample.postman_environment.json \
+            -e environments/QA.postman_environment.json \
             --env-var "base_url=${BASE_URL}" \
             --env-var "api_key=${API_KEY}" \
             -r cli,html \
