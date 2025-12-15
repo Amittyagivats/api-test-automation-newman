@@ -1,55 +1,18 @@
-# REST API Automation Framework  
-### Postman · Newman · GitHub Actions
+# API Test Automation with Newman & GitHub Actions
 
-A production-style **REST API automation framework** built using **Postman** and **Newman**, with **CI/CD execution via GitHub Actions**.  
-This project demonstrates real-world API testing practices including CRUD validation, negative testing, schema/contract validation, performance checks, and secure secrets management.
+## Tech Stack
+- Postman
+- Newman
+- GitHub Actions
+- Allure Reports
 
----
+## Test Coverage
+- Smoke Tests
+- Regression Tests
+- Contract Validation
+- Performance Checks
 
-## 🚀 Key Highlights
-
-- End-to-end REST API automation using Postman
-- Structured test suites: Sanity, Positive, Negative, Contract & Performance
-- Full CRUD coverage (GET, POST, PUT, PATCH, DELETE)
-- Schema / contract validation to detect breaking changes
-- Authentication & authorization testing (Bearer token)
-- Response time (performance) assertions
-- CLI execution using Newman
-- CI/CD integration via GitHub Actions
-- HTML execution reports as CI artifacts
-- Secure handling of secrets (no credentials committed)
-
----
-
-## 🧰 Tech Stack
-
-| Tool | Purpose |
-|----|----|
-| **Postman** | API request creation & test scripting |
-| **Newman** | CLI runner for Postman collections |
-| **GitHub Actions** | CI/CD execution |
-| **Node.js** | Runtime environment |
-| **HTML Reporter** | Test execution reports |
-
----
-
-## 📁 Project Structure
-
-```text
-postman-newman-api-framework/
-│
-├── collections/
-│   └── ReqRes_API_Testing.postman_collection.json
-│
-├── environments/
-│   └── QA.sample.postman_environment.json
-│
-├── reports/
-│   └── .gitkeep
-│
-├── .github/
-│   └── workflows/
-│       └── newman.yml
-│
-├── .gitignore
-└── README.md
+## How to Run Locally
+```bash
+newman run collections/ReqRes_API_Testing.postman_collection.json \
+  -e environments/QA.sample.postman_environment.json

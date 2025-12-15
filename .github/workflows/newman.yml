@@ -1,39 +1,29 @@
-name: API Tests - Newman
+name: API Automation - Newman
 
 on:
   push:
     branches: [ main ]
   pull_request:
-    branches: [ main ]
-  workflow_dispatch:
 
 jobs:
-  run-newman-tests:
+  api-tests:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout repository code
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      # 2️⃣ Setup Node.js (runtime for Newman)
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: 18
 
-      # 3️⃣ Install Newman and HTML reporter
-      - name: Install Newman
+      - name: Install Newman + Allure
         run: |
           npm install -g newman
-          npm install -g newman-reporter-html
+          npm install -g newman-reporter-allure
+          npm install -g allure-commandline
 
-      # 4️⃣ Create reports directory
-      - name: Create reports directory
-        run: mkdir -p reports
-
-      # 5️⃣ Run API tests using Newman
-      - name: Run Newman tests
+      - name: Run Smoke Tests
         env:
           BASE_URL: ${{ secrets.BASE_URL }}
           API_KEY: ${{ secrets.API_KEY }}
@@ -42,12 +32,15 @@ jobs:
             -e environments/QA.postman_environment.json \
             --env-var "base_url=${BASE_URL}" \
             --env-var "api_key=${API_KEY}" \
-            -r cli,html \
-            --reporter-html-export reports/api-test-report.html
+            -r cli,allure \
+            --reporter-allure-export allure-results
 
-      # 6️⃣ Upload HTML report as artifact
-      - name: Upload Newman Report
+      - name: Generate Allure Report
+        run: |
+          allure generate allure-results --clean -o allure-report
+
+      - name: Upload Allure Report
         uses: actions/upload-artifact@v4
         with:
-          name: newman-api-test-report
-          path: reports/api-test-report.html
+          name: allure-report
+          path: allure-report
